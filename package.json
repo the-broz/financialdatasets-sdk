@@ -1,5 +1,7 @@
 {
   "name": "financialdatasets-sdk",
+  "version": "0.1.0",
+  "description": "SDK for accessing Financial Datasets API with LLM function calling support",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +13,8 @@
     "build": "tsc",
     "test": "tsc && node dist/test.js",
     "generate": "openapi-generator-cli generate -i ./src/openai.v1.json -g typescript-axios -o src/sdk",
-    "prepublishOnly": "npm run build && npm run generate"
+    "prepublishOnly:preview": "npm run build && npm run generate",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "finance",
@@ -24,7 +27,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/leomercier/financialdatasets-llm-sdk.git"
+    "url": "git+https://github.com/leomercier/financialdatasets-llm-sdk.git"
   },
   "homepage": "https://github.com/leomercier/financialdatasets-llm-sdk#readme",
   "devDependencies": {

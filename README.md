@@ -2,6 +2,8 @@
 
 A TypeScript SDK providing easy access to the Financial Datasets API, with built-in integrations for LLMs via the Vercel AI SDK.
 
+![Example usage of tool](./docs/demo.gif)
+
 ## Features
 
 - Complete TypeScript definitions for all Financial Datasets API endpoints
