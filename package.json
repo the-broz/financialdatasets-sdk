@@ -1,0 +1,23 @@
+{
+  "name": "financialdatasets-sdk",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "generate": "openapi-generator-cli generate -i ./src/openai.v1.json -g typescript-axios -o src/sdk",
+    "prepublishOnly": "npm run build && npm run generate"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.17.0",
+    "@types/bun": "latest",
+    "add": "^2.0.6"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "ai": "^4.1.46",
+    "axios": "^1.8.1",
+    "zod": "^3.24.2"
+  }
+}
