@@ -1,5 +1,5 @@
 {
-  "name": "@thebroz/financialdatasets-sdk",
+  "name": "financialdatasets-sdk-fork-aamm",
   "version": "0.1.0",
   "description": "SDK for accessing Financial Datasets API with LLM function calling support",
   "main": "dist/index.js",
