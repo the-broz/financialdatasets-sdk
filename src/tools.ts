@@ -9,11 +9,11 @@ const periodParam = z
   .describe("The time period of the financial statements");
 const limitParam = z
   .number()
-  .optional()
+  .nullable()
   .describe("The maximum number of results to return");
 const cikParam = z
   .string()
-  .optional()
+  .nullable()
   .describe("The Central Index Key (CIK) of the company");
 
 /**
@@ -198,26 +198,22 @@ export function createFinancialDataTools(
                 .describe("The value to compare against")
             })
           )
-          .min(1)
           .describe("An array of filter objects to apply to the search"),
         period: z
           .enum(["annual", "quarterly", "ttm"])
-          .optional()
-          .default("ttm")
+          .nullable()
           .describe("The time period for the financial data"),
         limit: z
           .number()
-          .optional()
-          .default(100)
+          .nullable()
           .describe("The maximum number of results to return"),
         order_by: z
           .enum(["ticker", "-ticker", "report_period", "-report_period"])
-          .optional()
-          .default("ticker")
+          .nullable()
           .describe("The field to order the results by"),
         currency: z
           .enum(["USD", "EUR", "GBP", "JPY", "CHF", "AUD", "CAD", "SEK"])
-          .optional()
+          .nullable()
           .describe("The currency of the financial data")
       }),
       execute: async ({ filters, period, limit, order_by, currency }) => {
@@ -241,21 +237,17 @@ export function createFinancialDataTools(
       parameters: z.object({
         line_items: z
           .array(z.string())
-          .min(1)
           .describe("Financial metrics to search for"),
         tickers: z
           .array(z.string())
-          .min(1)
           .describe("Array of ticker symbols to search"),
         period: z
           .enum(["annual", "quarterly", "ttm"])
-          .optional()
-          .default("ttm")
+          .nullable()
           .describe("The time period for the financial data"),
         limit: z
           .number()
-          .optional()
-          .default(1)
+          .nullable()
           .describe("The maximum number of results per ticker to return")
       }),
       execute: async ({ line_items, tickers, period, limit }) => {
@@ -302,7 +294,6 @@ export function createFinancialDataTools(
           .describe("The time interval for the price data"),
         interval_multiplier: z
           .number()
-          .min(1)
           .describe("The multiplier for the interval"),
         start_date: z
           .string()
@@ -312,10 +303,7 @@ export function createFinancialDataTools(
           .describe("The end date for the price data (format: YYYY-MM-DD)"),
         limit: z
           .number()
-          .min(1)
-          .max(5000)
-          .optional()
-          .default(5000)
+          .nullable()
           .describe(
             "The maximum number of price records to return (default: 5000, max: 5000)"
           )
@@ -367,10 +355,10 @@ export function createFinancialDataTools(
       description: "Get SEC filings for a company",
       parameters: z
         .object({
-          ticker: z.string().optional().describe("The ticker symbol"),
+          ticker: z.string().nullable().describe("The ticker symbol"),
           cik: z
             .string()
-            .optional()
+            .nullable()
             .describe("The Central Index Key (CIK) of the company")
         })
         .refine((data) => data.ticker || data.cik, {
@@ -397,8 +385,7 @@ export function createFinancialDataTools(
         ticker: tickerParam,
         limit: z
           .number()
-          .optional()
-          .default(10)
+          .nullable()
           .describe(
             "The maximum number of transactions to return (default: 10)"
           )
@@ -424,15 +411,15 @@ export function createFinancialDataTools(
         ticker: tickerParam,
         strike_price: z
           .number()
-          .optional()
+          .nullable()
           .describe("The strike price of the options contract"),
         option_type: z
           .enum(["call", "put"])
-          .optional()
+          .nullable()
           .describe("The type of option contract (call or put)"),
         expiration_date: z
           .string()
-          .optional()
+          .nullable()
           .describe("The expiration date of the options contract (YYYY-MM-DD)")
       }),
       execute: async ({
